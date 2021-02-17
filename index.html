@@ -10,6 +10,8 @@
 			margin:0;padding:0;border:0;
 		}
 		html, body {
+			/*최고 REM 지정*/
+			font-size:1vh;
 			overflow:hidden;
 			width:100%;height:100%;
 		}
@@ -17,12 +19,12 @@
 			background:#303030;
 		}
 		.splide, .splide__track {
-			width:100%;height:94vh;
+			width:100%;height:94rem;
 		}
 		.splide__slide {
-			margin:1vh 10vh 3vh 10vh;
-			width:69vh;
-			height:92vh;
+			margin:1rem 10rem 3rem 10rem;
+			width:69rem;
+			height:92rem;
 			background-repeat:no-repeat;
 			background-size:contain;
 			background-position:50% 50%;
@@ -37,9 +39,9 @@
 			background:#303030;
 
 			color:white;
-			font-size:5vh;
+			font-size:5rem;
 			text-align:center;
-			line-height:100vh;
+			line-height:100rem;
 			user-select: none;
 		}
 		#focus {
@@ -50,14 +52,14 @@
 
 			width:100%;
 				left:0;top:0;
-			height:94vh;
-			background-color:rgba(0,0,0,0.6);
-			opacity:0;
+			height:94rem;
+			background-color:rgba(0,0,0,0.8);
+			opacity:0.1;
+			transition: opacity 0.2s;
 		}
 			#focus.active {
 				display:block;
 				opacity:1;
-  				transition: opacity 1s;
 			}
 			#focusImg {
 				width:100%;
@@ -70,11 +72,11 @@
 			display:flex;
 			justify-content: center;
 			width:100%;
-			height:6vh;
+			height:6rem;
 
 			color:white;
-			font-size:3vh;
-			line-height:6vh;
+			font-size:3rem;
+			line-height:6rem;
 			text-align:center;
 			user-select: none;
 		}
@@ -85,11 +87,11 @@
 				bottom:0;right:0;
 			z-index:20;
 			width:auto;
-			height:3vh;
+			height:3rem;
 
 			color:white;
-			font-size:1vh;
-			line-height:3vh;
+			font-size:1rem;
+			line-height:3rem;
 			text-align:center;
 			user-select: none;
 		}
@@ -119,6 +121,12 @@
 		<script>
 			//실행
 			document.addEventListener( 'DOMContentLoaded', async function () {
+				//REM 설정
+				document.querySelector('HTML').style.fontSize = window.innerHeight * 0.01;
+				window.addEventListener('resize', () => {
+					document.querySelector('HTML').style.fontSize = window.innerHeight * 0.01;
+				});
+
 				//이미지 감지
 				let imageNum = 0
 				let imageArr = []
@@ -181,6 +189,8 @@
 				//슬라이드 클릭
 				document.querySelectorAll('.splide__slide').forEach(elm => {
 					elm.onclick = function() {
+						document.getElementById('focus').style.display = "block"
+						//setTimeout(() => {
 						document.getElementById('focus').classList.add("active")
 						document.getElementById('focusImg').style.backgroundImage = elm.style.backgroundImage
 						document.getElementById('footer').innerHTML = "다른 이미지를 보려면 여기를 누르세요"
@@ -188,9 +198,13 @@
 
 						document.getElementById('footer').onclick = () => {
 							document.getElementById('focus').classList.remove("active")
-							document.getElementById('focusImg').style.backgroundImage = ""
 							document.getElementById('footer').innerHTML = "양산시립중앙도서관"
+							//setTimeout(() => {
+							document.getElementById('focus').style.display = "none"
+							document.getElementById('focusImg').style.backgroundImage = ""
+							//}, 200)
 						}
+						//},10)
 					}
 				})
 
