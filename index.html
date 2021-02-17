@@ -95,7 +95,7 @@
 				while (1) {
 					try {
 						//1차 : jpg 이미지 확인
-						let checked1 = await fetch('/imgs/' + (imageNum+1).toString() + '.jpg', { method: 'HEAD' })
+						let checked1 = await fetch('./imgs/' + (imageNum+1).toString() + '.jpg', { method: 'HEAD' })
 						//jpg 이미지 확인됨
 						if (checked1.ok) {
 							imageNum += 1
@@ -103,7 +103,7 @@
 						//jpg 이미지 확인안됨
 						} else {
 							//2차 : png 이미지 확인
-							let checked2 = await fetch('/imgs/' + (imageNum+1).toString() + '.png', { method: 'HEAD' })
+							let checked2 = await fetch('./imgs/' + (imageNum+1).toString() + '.png', { method: 'HEAD' })
 							//png 이미지 확인됨
 							if (checked2.ok) {
 								imageNum += 1
@@ -111,7 +111,7 @@
 							//png 이미지 확인안됨
 							} else {
 								//3차 : gif 이미지 확인
-								let checked3 = await fetch('/imgs/' + (imageNum+1).toString() + '.gif', { method: 'HEAD' })
+								let checked3 = await fetch('./imgs/' + (imageNum+1).toString() + '.gif', { method: 'HEAD' })
 								//gif 이미지 확인됨
 								if (checked3.ok) {
 									imageNum += 1
